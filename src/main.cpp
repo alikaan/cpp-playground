@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <memory>
+#include <thread>
+#include <mutex>
 
 #include "utils.h"
 #include "BankAccount.h"
@@ -13,6 +15,7 @@
 #include "LambdaExamples.h"
 #include "STLAndMoveExamples.h"
 #include "MyString.h"
+#include "TestThread.h"
 
 int main() {
     std::cout << "Hello from main!" << std::endl;
@@ -120,5 +123,35 @@ int main() {
 
     std::cout << std::endl;
 
+    TestThread::runThreadsWithFunction();
+    TestThread::runThreadsWithLambda();
+
+    std::cout << std::endl;
+
+    TestThread::runMultipleThreadsInLoop(5);
+
+    std::cout << std::endl;
+
+    auto task = []() {
+        std::cout << "Task running in thread." << std::endl;
+    };
+
+    std::thread t1(task);     // Start thread t1
+    std::thread t2 = std::move(t1); // Move t1 to t2
+
+    std::cout << std::endl;
+
+    if (!t1.joinable())
+    {
+        std::cout << "t1 is no longer joinable.\n";
+    }
+
+    if (t2.joinable())
+    {
+        std::cout << "t2 is joinable, waiting for it to finish.\n";
+        t2.join(); // Valid and safe
+    }
+
+    std::cout << std::endl;
     return 0;
 }

@@ -1,6 +1,13 @@
+#pragma once
 #include <iostream>
 #include <vector>
 #include <algorithm>
+
+/*
+[ captures ] ( parameters ) -> return_type {
+    function body
+}
+*/
 
 class LambdaExamples {
 public:
@@ -35,6 +42,25 @@ public:
         std::cout << "Modified y by reference: " << y << "\n";
     }
 
+    static void allByValue() {
+        int a = 1, b = 2;
+        auto byValue = [=]() {
+            std::cout << "Captured all by value: a = " << a << ", b = " << b << "\n";
+        };
+        byValue();
+    }
+
+    static void allByReference() {
+        int a = 1, b = 2;
+        auto byReference = [&]() {
+            std::cout << "Captured all by reference: a = " << a << ", b = " << b << "\n";
+        };
+        byReference();
+    }
+
+    // By default, variables captured by value in lambdas are const.
+    // Adding `mutable` allows the lambda to modify its own copy of those values.
+    // Note: This does NOT affect the original variable outside the lambda.
     static void mutableLambda() {
         int count = 0;
         auto increment = [count]() mutable {
@@ -54,14 +80,24 @@ public:
         std::cout << "\n";
     }
 
+    static void initCapture() {
+        auto initAtFirst = [z = 42]() {
+            std::cout << "Init capture (C++14): z = " << z << "\n";
+        };
+        initAtFirst();
+    }
+
     static void runAll() {
         std::cout << "Running Lambda Examples:\n";
         basicLambda();
         lambdaWithParams();
         captureByValue();
         captureByReference();
+        allByValue();
+        allByReference();
         mutableLambda();
         lambdaInSTL();
+        initCapture();
         std::cout << "Finished Lambda Examples.\n\n";
     }   
 };
