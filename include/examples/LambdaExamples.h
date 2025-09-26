@@ -98,6 +98,6 @@ public:
         mutableLambda();
         lambdaInSTL();
         initCapture();
-        std::cout << "Finished Lambda Examples.\n\n";
+        std::cout << "Finished Lambda Examples.\n";
     }   
 };

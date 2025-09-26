@@ -2,16 +2,20 @@
 #include <iostream>
 
 class Animal {
-public:
-    virtual void speak() const {
-        std::cout << "Animal speaks\n";
-    }
+    protected:
+        std::string name;
+    public:
+        Animal(const std::string& name = "Animal") : name(name) {}
+        virtual void speak() const {
+            std::cout << "Animal with a name " << name  << " speaks\n";
+        }
 };
 
 class Dog : public Animal {
 public:
+    Dog(const std::string& name = "Dog") : Animal(name) {}
     void speak() const override {
-        std::cout << "Dog barks\n";
+        std::cout << "Dog with a name " << name << " barks\n";
     }
 };
 

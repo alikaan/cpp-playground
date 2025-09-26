@@ -74,6 +74,5 @@ public:
         constPointerToValue();
         constPointerToConstValue();
 
-        std::cout << "=== End of Demo ===\n";
     }
 };

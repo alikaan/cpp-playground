@@ -44,6 +44,7 @@ class TestThread
                 threads.emplace_back(std::thread(sayHello, i, i + 1000));
                 //threads.push_back(std::thread(sayHello, i, i + 1000));
                 //threads[i] = std::thread(sayHello, i, i + 1000);
+                
                 /* Alternatively, you can use std::move to transfer ownership
                 std::thread t(sayHello, i, i + 1000);
                 threads.push_back(std::move(t));  // move t into the vector
